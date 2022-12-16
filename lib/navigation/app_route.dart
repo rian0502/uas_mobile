@@ -1,3 +1,4 @@
+import 'package:unila_data/models/ProfileManager.dart';
 import 'package:unila_data/models/app_state_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unila_data/screen/splash_screen.dart';
@@ -6,8 +7,8 @@ import '../home.dart';
 
 class AppRoute{
   final AppStateManager? appStateManager;
-
-  AppRoute({this.appStateManager});
+  final ProfileManager? profileManager;
+  AppRoute(this.appStateManager, this.profileManager);
 
   late final routes = GoRouter(
     debugLogDiagnostics: true,

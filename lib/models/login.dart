@@ -52,6 +52,7 @@ class Data{
     type = json['type'];
     token = json['token'];
   }
+
   Map<String, dynamic> toJson(){
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
