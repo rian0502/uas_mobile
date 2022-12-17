@@ -1,32 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:unila_data/models/mahasiswa.dart';
 
+class MahasiswaThumbnail extends StatelessWidget {
+  final Data? mahasiswa;
+  const MahasiswaThumbnail({Key? key, this.mahasiswa}) : super(key: key);
 
-class MahasiswaThumbnail extends StatefulWidget {
-
-  const MahasiswaThumbnail({Key? key}) : super(key: key);
-
-  @override
-  State<MahasiswaThumbnail> createState() => _MahasiswaThumbnailState();
-}
-
-class _MahasiswaThumbnailState extends State<MahasiswaThumbnail> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text('Nama'),
-          Text('NPM'),
-          Text('Semester'),
-          Row(
-            children: [
-              Text('IPK'),
-              Text('IPS')
-            ],
-          ),
-          Text('Status')
-        ],
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.blue,
+        child: Text(
+          mahasiswa!.periodeMasuk!.substring(0, 4).toString(),
+          style: GoogleFonts.salsa(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
       ),
+      title: Text(mahasiswa!.nPM!.toString()),
+      subtitle: Text(mahasiswa!.namaMahasiswa!.toString()),
     );
   }
 }

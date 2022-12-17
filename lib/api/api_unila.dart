@@ -1,10 +1,15 @@
+
+
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/lembaga.dart';
 import '../models/login.dart';
 import '../models/mahasiswa.dart';
 
-class ServiceAPI {
+class ApiUnila {
   static const String _baseUrl = 'http://onedata.unila.ac.id/api/live/0.1/auth/login';
   static final dio =  Dio();
 
@@ -24,8 +29,8 @@ class ServiceAPI {
   }
 
   static Future<Mahasiswa> getMahasiswa(int currentPage) async{
-    final prefs = await SharedPreferences.getInstance();
-    dio.options.headers['Authorization'] = prefs.getString('token');
+    var token = await getLoginAccess().then((value) => value.data!.token);
+    dio.options.headers['Authorization'] = "bearer${token}";
     var response = await dio.get('http://onedata.unila.ac.id/api/live/0.1/mahasiswa/list_mahasiswa?page=$currentPage&limit=50&sort_by=ASC&id_prodi=54BBD27B-2376-4CAE-9951-76EF54BD2CA2');
     if (response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.toString());
@@ -35,5 +40,15 @@ class ServiceAPI {
     }
 
   }
-
+  static Future<Lembaga> getLembaga() async{
+    var token = await getLoginAccess().then((value) => value.data!.token);
+    dio.options.headers['Authorization'] = "bearer${token}";
+    var response = await dio.get('http://onedata.unila.ac.id/api/live/0.1/lembaga/daftar_lembaga');
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> json = jsonDecode(response.toString());
+      return Lembaga.fromJson(json);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 }

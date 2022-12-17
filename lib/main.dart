@@ -1,65 +1,75 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unila_data/models/ProfileManager.dart';
-import 'package:unila_data/thema.dart';
-import 'api/api.dart';
-import 'models/app_state_manager.dart';
-import 'navigation/app_route.dart';
+import 'package:unila_data/api/api_unila.dart';
+import 'fooderlich_theme.dart';
+import 'models/models.dart';
+import 'navigation/app_router.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final appStateManager = AppStateManager();
-  final pref = await SharedPreferences.getInstance();
-  ServiceAPI.getLoginAccess().then((value) => {
-    pref.setString('token', 'bearer${value.data!.token}')
-  });
-  runApp(MyApp(appStateManager: appStateManager,));
 
+  final appStateManager = AppStateManager();
+  await appStateManager.initializeApp();
+  runApp(Fooderlich(appStateManager: appStateManager));
 }
-class MyApp extends StatefulWidget {
+
+class Fooderlich extends StatefulWidget {
   final AppStateManager appStateManager;
-  const MyApp({
+
+  const Fooderlich({
     Key? key,
     required this.appStateManager,
   });
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  FooderlichState createState() => FooderlichState();
 }
 
-class _MyAppState extends State<MyApp> {
+class FooderlichState extends State<Fooderlich> {
+  late final _groceryManager = GroceryManager();
   late final _profileManager = ProfileManager();
-  late final _appRouter = AppRoute(
+  late final _appRouter = AppRouter(
     widget.appStateManager,
-    _profileManager
+    _profileManager,
+    _groceryManager,
   );
+
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => _groceryManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => _profileManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => widget.appStateManager,
+        ),
+      ],
+      child: Consumer<ProfileManager>(
+        builder: (context, profileManager, child) {
+          ThemeData theme;
+          if (profileManager.darkMode) {
+            theme = FooderlichTheme.dark();
+          } else {
+            theme = FooderlichTheme.light();
+          }
 
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context) => widget.appStateManager),
-      ChangeNotifierProvider(create: (context) => _profileManager),
-    ],
-    child: Consumer<ProfileManager>(
-      builder: (context, profileManager, child) {
-        ThemeData theme;
-        if (profileManager.darkMode) {
-          theme = Thema.dark();
-        } else {
-          theme = Thema.light();
-        }
-        final router = _appRouter.routes;
-        return MaterialApp.router(
-          title: 'One Data Unila',
-          theme: theme,
-          routerDelegate: router.routerDelegate,
-          routeInformationParser: router.routeInformationParser,
-          routeInformationProvider: router.routeInformationProvider,
-        );
-      },
-    ),
+          final router = _appRouter.router;
+
+          return MaterialApp.router(
+            theme: theme,
+            title: 'One Data Unila',
+            routerDelegate: router.routerDelegate,
+            routeInformationParser: router.routeInformationParser,
+            routeInformationProvider: router.routeInformationProvider,
+          );
+        },
+      ),
     );
   }
 }

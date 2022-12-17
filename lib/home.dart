@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unila_data/screen/mahasiswa_screen.dart';
+import 'package:unila_data/screens/dosen_screen.dart';
+import 'package:unila_data/screens/explore_screen.dart';
+import 'package:unila_data/screens/grocery_screen.dart';
+import 'package:unila_data/screens/lembaga_screen.dart';
+import 'package:unila_data/screens/mahasiswa_screen.dart';
+import 'package:unila_data/screens/recipes_screen.dart';
+import 'package:unila_data/sqlite/database_helper.dart';
 
 
 class Home extends StatefulWidget {
@@ -20,9 +26,9 @@ class HomeState extends State<Home> {
   int _selectedIndex = 0;
   static const String prefSelectedIndexKey = 'selectedIndex';
   static List<Widget> pages = <Widget>[
-    MahasiswaScreen(),
-    MahasiswaScreen(),
-    MahasiswaScreen(),
+    const MahasiswaScreen(),
+    const DosenScreen(),
+    const LembagaScreen(),
   ];
 
   @override
@@ -30,6 +36,7 @@ class HomeState extends State<Home> {
     super.initState();
     getCurrentIndex();
     //create db
+    DatabaseHelper.db.database;
   }
 
   void getCurrentIndex() async {
@@ -49,7 +56,7 @@ class HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Fooderlich',
+          'One Data Unila',
           style: Theme.of(context).textTheme.headline6,
         ),
         actions: [
@@ -84,16 +91,16 @@ class HomeState extends State<Home> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
+            icon: Icon(Icons.person),
+            label: 'Mahasiswa',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Recipes',
+            icon: Icon(Icons.face),
+            label: 'Dosen',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'To Buy',
+            icon: Icon(Icons.house),
+            label: 'Lembaga',
           ),
 
         ],
@@ -107,31 +114,23 @@ class HomeState extends State<Home> {
   }
 
   Widget favoritButton(int currentTab) {
-    return IconButton(
-      icon: const Icon(Icons.favorite, color: Colors.red,),
-      onPressed: () {
-        context.goNamed('favorite', params: {
-          'tab': '$currentTab',
-        });
-      },
-    );
-  }
-  Widget profileButton(int currentTab) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: GestureDetector(
-        child: const CircleAvatar(
-          backgroundColor: Colors.transparent,
-          backgroundImage: AssetImage(
-            'assets/profile_pics/person_stef.jpeg',
-          ),
-        ),
-        onTap: () {
-          context.goNamed('profile', params: {
+      return IconButton(
+        icon: const Icon(Icons.favorite, color: Colors.red,),
+        onPressed: () {
+          context.goNamed('favorite', params: {
             'tab': '$currentTab',
           });
         },
-      ),
+      );
+  }
+  Widget profileButton(int currentTab) {
+    return IconButton(
+      icon: const Icon(Icons.settings, color: Colors.red,),
+      onPressed: () {
+        context.goNamed('profile', params: {
+          'tab': '$currentTab',
+        });
+      },
     );
   }
 }
