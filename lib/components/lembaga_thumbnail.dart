@@ -10,7 +10,7 @@ class LembagaThumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(lembaga!.nmLemb!.toString()),
-      subtitle: Text(lembaga!.email!.toString()),
+      subtitle: Text(lembaga!.nmJnsSms!.toString()),
     );
   }
 }

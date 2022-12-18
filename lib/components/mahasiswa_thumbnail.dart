@@ -8,16 +8,18 @@ class MahasiswaThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Card(
+        child: ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.blue,
         child: Text(
           mahasiswa!.periodeMasuk!.substring(0, 4).toString(),
-          style: GoogleFonts.salsa(fontWeight: FontWeight.bold, color: Colors.white),
+          style: GoogleFonts.salsa(
+              fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       title: Text(mahasiswa!.nPM!.toString()),
       subtitle: Text(mahasiswa!.namaMahasiswa!.toString()),
-    );
+    ));
   }
 }

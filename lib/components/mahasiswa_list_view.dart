@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unila_data/components/detail_mahasiswa.dart';
 import 'package:unila_data/models/mahasiswa.dart';
-
 import 'mahasiswa_thumbnail.dart';
 
 class MahasiswaListView extends StatelessWidget {
@@ -14,7 +14,12 @@ class MahasiswaListView extends StatelessWidget {
         itemCount: mahasiswa!.data!.length,
         itemBuilder:  (context, index) {
           final mhs = mahasiswa!.data![index];
-          return MahasiswaThumbnail(mahasiswa: mhs,);
+          return GestureDetector(
+            child: MahasiswaThumbnail(mahasiswa: mhs,),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailMahasiswa(mahasiswa: mhs,)));
+            },
+          );
         }
         )
 

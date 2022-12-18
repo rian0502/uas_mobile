@@ -36,7 +36,6 @@ class _MahasiswaScreenState extends State<MahasiswaScreen> {
               onPressed: () {
                 setState(() {
                   if(_currentPage == 1){
-                    _currentPage = 1;
                   }else{
                     _currentPage = _currentPage - 1;
                   }
@@ -49,7 +48,10 @@ class _MahasiswaScreenState extends State<MahasiswaScreen> {
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
                 setState(() {
-                  _currentPage = _currentPage + 1;
+                 if(_currentPage == 11) {
+                 }else{
+                   _currentPage = _currentPage + 1;
+                 }
                 });
               },
               child: const Text('Next'),

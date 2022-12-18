@@ -1,10 +1,8 @@
 
 
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import '../models/dosen.dart';
 import '../models/lembaga.dart';
 import '../models/login.dart';
 import '../models/mahasiswa.dart';
@@ -40,6 +38,7 @@ class ApiUnila {
     }
 
   }
+
   static Future<Lembaga> getLembaga() async{
     var token = await getLoginAccess().then((value) => value.data!.token);
     dio.options.headers['Authorization'] = "bearer${token}";
@@ -47,6 +46,20 @@ class ApiUnila {
     if (response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.toString());
       return Lembaga.fromJson(json);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  static Future<Dosen> getDosen() async{
+    var token = await getLoginAccess().then((value) => value.data!.token);
+    dio.options.headers['Authorization'] = "bearer${token}";
+    var response = await dio.get('http://onedata.unila.ac.id/api/live/0.1/mata_kuliah/list_dosen_ajar?page=1&limit=50&id_kelas=9DCF2A1B-61BE-4E72-8F93-022D58D0F17D');
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> json = jsonDecode(response.toString());
+
+      return Dosen.fromJson(json);
     } else {
       throw Exception('Failed to load data');
     }
