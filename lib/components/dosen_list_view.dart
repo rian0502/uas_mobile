@@ -11,10 +11,10 @@ class DosenListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(padding: const EdgeInsets.only(left: 15, right: 15, top: 16),
       child: ListView.builder(
-          itemCount: 10,
+          itemCount: dosen!.response!.data!.length,
           itemBuilder:  (context, index) {
             return GestureDetector(
-              child: DosenThumbnail(),
+              child: DosenThumbnail(dosen: dosen!.response!.data![index],),
               onTap: () {
                 print(dosen!.response!.data![index].nmDosen);
               },

@@ -30,7 +30,7 @@ class Dosen {
     data['latency'] = this.latency;
     data['error'] = this.error;
     if (response != null) {
-      data['response'] = this.response!.toJson();
+      data['response'] = response!.toJson();
     }
     return data;
   }

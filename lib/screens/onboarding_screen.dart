@@ -21,7 +21,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final controller = PageController();
-  final Color rwColor = const Color.fromRGBO(64, 143, 77, 1);
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +48,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       controller: controller,
       children: [
         onboardPageView(
-          const AssetImage('assets/fooderlich_assets/recommend.png'),
-          '''Check out weekly recommended recipes and what your friends are cooking!''',
+          const AssetImage('assets/images/students.jpg'),
+          '''Melihat Data Mahasiswa Ilmu Komputer''',
         ),
         onboardPageView(
-          const AssetImage('assets/fooderlich_assets/sheet.png'),
-          'Cook with step by step instructions!',
+          const AssetImage('assets/images/dosen.jpg'),
+          '''Melihat Data Dosen Pengajar Ilmu Komputer''',
         ),
         onboardPageView(
-          const AssetImage('assets/fooderlich_assets/list.png'),
-          'Keep track of what you need to buy',
+          const AssetImage('assets/images/lembaga.jpg'),
+          'Melihat Daftar Lembaga di Universitas Lampung',
         ),
       ],
     );
@@ -105,7 +105,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       controller: controller,
       count: 3,
       effect: WormEffect(
-        activeDotColor: rwColor,
+        activeDotColor: Colors.blue,
       ),
     );
   }

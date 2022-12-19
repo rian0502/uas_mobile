@@ -79,7 +79,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/logo-unila.png
+    - assets/images/students.jpg
+    - assets/images/dosen.jpg
+    - assets/images/lembaga.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

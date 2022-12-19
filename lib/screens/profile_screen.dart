@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../components/circle_image.dart';
 import '../models/models.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -31,7 +30,6 @@ class ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 16.0),
-            buildProfile(),
             Expanded(
               child: buildMenu(),
             )
@@ -46,10 +44,10 @@ class ProfileScreenState extends State<ProfileScreen> {
       children: [
         buildDarkModeRow(),
         ListTile(
-          title: const Text('View raywenderlich.com'),
+          title: const Text('Github'),
           onTap: () async {
             if (kIsWeb || Platform.isMacOS) {
-              await launchUrl(Uri.parse('https://www.raywenderlich.com/'));
+              await launchUrl(Uri.parse('https://github.com/rian0502/uas_mobile.git'));
             } else {
               context.goNamed(
                 'rw',
@@ -59,7 +57,7 @@ class ProfileScreenState extends State<ProfileScreen> {
           },
         ),
         ListTile(
-          title: const Text('Log out'),
+          title: const Text('Keluar'),
           onTap: () {
             Provider.of<AppStateManager>(context, listen: false).logout();
           },
@@ -84,32 +82,6 @@ class ProfileScreenState extends State<ProfileScreen> {
           )
         ],
       ),
-    );
-  }
-
-  Widget buildProfile() {
-    return Column(
-      children: [
-        CircleImage(
-          imageProvider: AssetImage(widget.user!.profileImageUrl!),
-          imageRadius: 60.0,
-        ),
-        const SizedBox(height: 16.0),
-        Text(
-          widget.user!.firstName!,
-          style: const TextStyle(
-            fontSize: 21,
-          ),
-        ),
-        Text(widget.user!.role),
-        Text(
-          '${widget.user!.points} points',
-          style: const TextStyle(
-            fontSize: 30,
-            color: Colors.green,
-          ),
-        ),
-      ],
     );
   }
 }
