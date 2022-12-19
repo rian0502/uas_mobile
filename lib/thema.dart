@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FooderlichTheme{
+class Thema{
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w700),
     headline1: GoogleFonts.openSans(color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),

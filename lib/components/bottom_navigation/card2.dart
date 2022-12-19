@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../fooderlich_theme.dart';
+import '../../thema.dart';
 import '../../inheritanced_widget.dart';
 import '../../models/explore_recipe.dart';
 
@@ -40,7 +40,7 @@ class Card2 extends StatelessWidget {
                 Positioned(
                   bottom: 16,
                   right: 16,
-                  child: Text(recipe.title.toString(), style: FooderlichTheme.lightTextTheme.headline1),
+                  child: Text(recipe.title.toString(), style: Thema.lightTextTheme.headline1),
                 ),
 
                 Positioned(
@@ -48,7 +48,7 @@ class Card2 extends StatelessWidget {
                   left:16 ,
                   child: RotatedBox(
                     quarterTurns: 3,
-                    child: Text(recipe.subtitle.toString(), style: FooderlichTheme.lightTextTheme.headline1),
+                    child: Text(recipe.subtitle.toString(), style: Thema.lightTextTheme.headline1),
                   ),
                 ),
 

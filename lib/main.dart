@@ -2,31 +2,32 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unila_data/api/api_unila.dart';
-import 'fooderlich_theme.dart';
+import 'thema.dart';
 import 'models/models.dart';
 import 'navigation/app_router.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ApiUnila.getBukuAjar(1).then((value) => print(value.data![0].judulBuku));
   final appStateManager = AppStateManager();
   await appStateManager.initializeApp();
-  runApp(Fooderlich(appStateManager: appStateManager));
+  runApp(UnilaData(appStateManager: appStateManager));
 }
 
-class Fooderlich extends StatefulWidget {
+class UnilaData extends StatefulWidget {
   final AppStateManager appStateManager;
 
-  const Fooderlich({
+  const UnilaData({
     Key? key,
     required this.appStateManager,
   });
 
   @override
-  FooderlichState createState() => FooderlichState();
+  UnilaDataState createState() => UnilaDataState();
 }
 
-class FooderlichState extends State<Fooderlich> {
+class UnilaDataState extends State<UnilaData> {
   late final _groceryManager = GroceryManager();
   late final _profileManager = ProfileManager();
   late final _appRouter = AppRouter(
@@ -53,9 +54,9 @@ class FooderlichState extends State<Fooderlich> {
         builder: (context, profileManager, child) {
           ThemeData theme;
           if (profileManager.darkMode) {
-            theme = FooderlichTheme.dark();
+            theme = Thema.dark();
           } else {
-            theme = FooderlichTheme.light();
+            theme = Thema.light();
           }
 
           final router = _appRouter.router;

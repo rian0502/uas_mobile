@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../fooderlich_theme.dart';
+import '../thema.dart';
 import '../inheritanced_widget.dart';
 import 'circle_image.dart';
 
@@ -40,11 +40,11 @@ class _AuthorCardState extends State<AuthorCard> {
                 children: [
                   Text(
                     widget.authorName,
-                    style: FooderlichTheme.lightTextTheme.headline2,
+                    style: Thema.lightTextTheme.headline2,
                   ),
                   Text(
                     widget.title,
-                    style: FooderlichTheme.lightTextTheme.bodyText1,
+                    style: Thema.lightTextTheme.bodyText1,
                   ),
                 ],
               ),

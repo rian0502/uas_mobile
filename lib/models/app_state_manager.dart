@@ -6,6 +6,7 @@ class FooderlichTab {
   static const int explore = 1;
   static const int recipes = 0;
   static const int toBuy = 2;
+  static const int buku = 3;
 }
 
 // AppStateManager mocks the various app state such as app initialization,

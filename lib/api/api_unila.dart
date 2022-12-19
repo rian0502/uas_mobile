@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import '../models/buku_ajar.dart';
 import '../models/dosen.dart';
 import '../models/lembaga.dart';
 import '../models/login.dart';
@@ -58,5 +59,17 @@ class ApiUnila {
 
     final Map<String, dynamic> json = jsonDecode(response.toString());
     return Dosen.fromJson(json);
+  }
+
+  static Future<BukuAjar> getBukuAjar(page) async{
+    var token = await getLoginAccess().then((value) => value.data!.token);
+    dio.options.headers['Authorization'] = "bearer${token}";
+    var response = await dio.get('http://onedata.unila.ac.id/api/live/0.1/buku_ajar/daftar?page=$page&limit=25&sort_by=ASC');
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> json = jsonDecode(response.toString());
+      return BukuAjar.fromJson(json);
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
 }

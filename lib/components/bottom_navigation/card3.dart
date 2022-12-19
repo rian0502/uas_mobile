@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../../fooderlich_theme.dart';
+import '../../thema.dart';
 import '../../models/explore_recipe.dart';
 
 
@@ -14,7 +14,7 @@ class Card3 extends StatelessWidget {
     recipe.tags?.take(5).forEach((element) {
       final chip = Chip(
         label: Text(element),
-        labelStyle: FooderlichTheme.lightTextTheme.bodyText1,
+        labelStyle: Thema.lightTextTheme.bodyText1,
         backgroundColor: Colors.grey[400],
         shape: StadiumBorder(
           side: BorderSide(color: Colors.grey[400]!),
@@ -50,7 +50,7 @@ class Card3 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.book, color: Colors.white, size: 40,),
-                  Text(recipe.title.toString(),style: FooderlichTheme.darkTextTheme.headline2,),
+                  Text(recipe.title.toString(),style: Thema.darkTextTheme.headline2,),
                   const SizedBox(height: 30,)
                 ],
               ),

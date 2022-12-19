@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unila_data/screens/buku_ajar_screen.dart';
 import 'package:unila_data/screens/dosen_screen.dart';
 import 'package:unila_data/screens/explore_screen.dart';
 import 'package:unila_data/screens/grocery_screen.dart';
@@ -8,7 +9,6 @@ import 'package:unila_data/screens/lembaga_screen.dart';
 import 'package:unila_data/screens/mahasiswa_screen.dart';
 import 'package:unila_data/screens/recipes_screen.dart';
 import 'package:unila_data/sqlite/database_helper.dart';
-
 
 class Home extends StatefulWidget {
   const Home({
@@ -29,6 +29,7 @@ class HomeState extends State<Home> {
     const MahasiswaScreen(),
     const DosenScreen(),
     const LembagaScreen(),
+    const BukuAjarScreen(),
   ];
 
   @override
@@ -69,13 +70,10 @@ class HomeState extends State<Home> {
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
         currentIndex: _selectedIndex,
-
-
         onTap: (index) {
-
           setState(() {
             _selectedIndex = index;
           });
@@ -102,7 +100,10 @@ class HomeState extends State<Home> {
             icon: Icon(Icons.house),
             label: 'Lembaga',
           ),
-
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              label: 'Buku Ajar'
+          ),
         ],
       ),
     );
@@ -114,18 +115,25 @@ class HomeState extends State<Home> {
   }
 
   Widget favoritButton(int currentTab) {
-      return IconButton(
-        icon: const Icon(Icons.favorite, color: Colors.red,),
-        onPressed: () {
-          context.goNamed('favorite', params: {
-            'tab': '$currentTab',
-          });
-        },
-      );
+    return IconButton(
+      icon: const Icon(
+        Icons.favorite,
+        color: Colors.red,
+      ),
+      onPressed: () {
+        context.goNamed('favorite', params: {
+          'tab': '$currentTab',
+        });
+      },
+    );
   }
+
   Widget profileButton(int currentTab) {
     return IconButton(
-      icon: const Icon(Icons.settings, color: Colors.red,),
+      icon: const Icon(
+        Icons.settings,
+        color: Colors.red,
+      ),
       onPressed: () {
         context.goNamed('profile', params: {
           'tab': '$currentTab',
