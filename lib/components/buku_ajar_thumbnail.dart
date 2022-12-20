@@ -15,6 +15,7 @@ class _BukuAjarThumbnailState extends State<BukuAjarThumbnail> {
     return Card(
       child: ListTile(
         title: Text(widget.bukuAjar!.judulBuku!),
+        subtitle: Text(widget.bukuAjar!.penerbit!),
       ),
     );
   }

@@ -74,4 +74,16 @@ class Data {
     data['terakhir_diubah'] = this.terakhirDiubah;
     return data;
   }
+  Map<String, dynamic> toMap() {
+    return {
+      'id_buku_ajar': idBukuAjar,
+      'judul_buku': judulBuku,
+      'isbn': isbn,
+      'tanggal_terbit': tanggalTerbit,
+      'penerbit': penerbit,
+      'waktu_data_ditambahkan': waktuDataDitambahkan,
+      'terakhir_diubah': terakhirDiubah,
+    };
+  }
+
 }

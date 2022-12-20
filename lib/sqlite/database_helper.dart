@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqlbrite/sqlbrite.dart';
-import '../models/simple_recipe.dart';
+import 'package:unila_data/models/buku_ajar.dart';
 
 class DatabaseHelper{
-  final String id = 'id';
-  final String dishImage = 'dishImage';
-  final String title = 'title';
-  final String duration = 'duration';
-  final String source = 'source';
-  final String information = 'information';
-  final String tablename = 'resep';
+  final String id = 'id_buku_ajar';
+  final String judul_buku = 'judul_buku';
+  final String isbn = 'isbn';
+  final String tanggal_terbit = 'tanggal_terbit';
+  final String penerbit = 'penerbit';
+  final String waktu_data_ditambahkan = 'waktu_data_ditambahkan';
+  final String terakhir_diubah = 'terakhir_diubah';
+  final String tablename = 'buku_ajar';
   //private constructor
   DatabaseHelper._();
   static final DatabaseHelper db = DatabaseHelper._();
@@ -28,7 +29,7 @@ class DatabaseHelper{
   //create datahase
   Future<Database> initDB() async{
     final databasePath = await getDatabasesPath();
-    final path = join(databasePath, 'fooderlich.db');
+    final path = join(databasePath, 'unila.db');
 
     return await openDatabase(
       path,
@@ -39,44 +40,18 @@ class DatabaseHelper{
 
   FutureOr<void> _onCreate(Database db, int version) async {
     var sql = 'CREATE TABLE $tablename($id TEXT PRIMARY KEY,'
-        '$dishImage TEXT, $title TEXT, $duration TEXT, $source TEXT,'
-        '$information TEXT)';
+        '$judul_buku TEXT, $isbn TEXT, $tanggal_terbit TEXT, $penerbit TEXT,'
+        '$waktu_data_ditambahkan TEXT, $terakhir_diubah TEXT)';
     await db.execute(sql);
   }
 
-  Future<int> addResep(SimpleRecipe recipe) async{
+  Future<int> addBuku(Data buku) async{
     final dbClient = await database;
-    final res = await dbClient!.insert(tablename, recipe.toMap());
-    print("id : $res berhasil ditambahkan");
+    final res = await dbClient!.insert(tablename, buku.toMap());
+    print("berhasil ditambahkan");
     return res;
   }
 
-  Future<int> deleteResep(String id) async{
-    final dbClient = await database;
-    final res = await dbClient!.delete(
-        tablename,
-        where: 'id = ?',
-        whereArgs: [id]);
-    return res;
-  }
 
-  Future<List> getAllid() async{
-    final dbClient = await database;
-    final res = await dbClient!.query(tablename, columns: [id]);
-    List<String> list = res.isNotEmpty ? res.map((c) => c['id'].toString()).toList() : [];
-    return list;
-  }
-  //get data
-  Future<List<SimpleRecipe>> getAllResep() async{
-    final dbClient = await database;
-    final res = await dbClient!.query(tablename, columns: [id, dishImage, title, duration, source]);
-    final list = res.toList();
-    List<SimpleRecipe> recipes = [];
-    for(var i = 0; i < list.length; i++){
-      recipes.add(SimpleRecipe.fromMap(list[i]));
-    }
-
-    return recipes;
-  }
 
 }

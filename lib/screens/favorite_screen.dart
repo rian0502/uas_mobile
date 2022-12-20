@@ -17,9 +17,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _getAllRecipes();
-    });
+
   }
 
   @override
@@ -58,10 +56,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             backgroundColor: Colors.white,
                             child: IconButton(
                               onPressed: () {
-                                DatabaseHelper.db.deleteResep(recipe.id.toString());
-                                setState(() {
-                                  _getAllRecipes();
-                                });
+
+
                               },
                               icon:
                                   const Icon(Icons.favorite, color: Colors.red),
@@ -99,10 +95,5 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
   }
 
-  Future<void> _getAllRecipes() async {
-    final dbClient = await DatabaseHelper.db.getAllResep();
-    setState(() {
-      recipes = dbClient;
-    });
-  }
+
 }

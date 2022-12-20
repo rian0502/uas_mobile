@@ -13,17 +13,7 @@ class RecipeThumbnail extends StatefulWidget {
 
 class _RecipeThumbnailState extends State<RecipeThumbnail> {
   bool isFavorit = false;
-  @override
-  void initState() {
-    DatabaseHelper.db.getAllid().then((value) {
-      if(value.contains(widget.recipe.id)){
-        setState(() {
-          isFavorit = true;
-        });
-      }
-    });
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,9 +35,9 @@ class _RecipeThumbnailState extends State<RecipeThumbnail> {
                           setState(() {
                             isFavorit = !isFavorit;
                             if(isFavorit){
-                              DatabaseHelper.db.addResep(widget.recipe);
+
                             }else{
-                              DatabaseHelper.db.deleteResep(widget.recipe.id.toString());
+
                             }
                           });
                         },

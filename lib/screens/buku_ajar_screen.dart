@@ -41,7 +41,7 @@ class _BukuAjarScreenState extends State<BukuAjarScreen> {
               },
               child: const Text('Prev'),
             ),
-            Text('Page : $_currentPage'),
+            Text('$_currentPage'),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {

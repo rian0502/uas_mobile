@@ -132,7 +132,7 @@ class HomeState extends State<Home> {
     return IconButton(
       icon: const Icon(
         Icons.settings,
-        color: Colors.red,
+        color: Colors.grey,
       ),
       onPressed: () {
         context.goNamed('profile', params: {

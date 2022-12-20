@@ -9,7 +9,6 @@ import 'navigation/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ApiUnila.getBukuAjar(1).then((value) => print(value.data![0].judulBuku));
   final appStateManager = AppStateManager();
   await appStateManager.initializeApp();
   runApp(UnilaData(appStateManager: appStateManager));
@@ -63,6 +62,7 @@ class UnilaDataState extends State<UnilaData> {
 
           return MaterialApp.router(
             theme: theme,
+            debugShowCheckedModeBanner: false,
             title: 'One Data Unila',
             routerDelegate: router.routerDelegate,
             routeInformationParser: router.routeInformationParser,
