@@ -27,7 +27,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Favorite Recipes",
+          "Buku Ajar Favorite",
         ),
         // automaticallyImplyLeading: false,
       ),

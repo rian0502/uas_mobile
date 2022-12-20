@@ -8,9 +8,9 @@ class LembagaThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Card(child: ListTile(
       title: Text(lembaga!.nmLemb!.toString()),
       subtitle: Text(lembaga!.nmJnsSms!.toString()),
-    );
+    ),);
   }
 }

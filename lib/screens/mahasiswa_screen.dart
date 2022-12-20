@@ -41,7 +41,7 @@ class _MahasiswaScreenState extends State<MahasiswaScreen> {
                   }
                 });
               },
-              child: const Text('Back'),
+              child: const Text('Prev'),
             ),
             Text('Page : $_currentPage'),
             ElevatedButton(
