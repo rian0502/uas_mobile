@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unila_data/api/api_unila.dart';
 import 'thema.dart';
 import 'models/models.dart';
 import 'navigation/app_router.dart';
@@ -27,21 +26,16 @@ class UnilaData extends StatefulWidget {
 }
 
 class UnilaDataState extends State<UnilaData> {
-  late final _groceryManager = GroceryManager();
   late final _profileManager = ProfileManager();
   late final _appRouter = AppRouter(
     widget.appStateManager,
     _profileManager,
-    _groceryManager,
   );
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => _groceryManager,
-        ),
         ChangeNotifierProvider(
           create: (context) => _profileManager,
         ),

@@ -1,8 +1,6 @@
 export 'author_card.dart';
-export 'bottom_navigation/card1.dart';
-export 'bottom_navigation/card2.dart';
-export 'bottom_navigation/card3.dart';
 export 'circle_image.dart';
-export 'today_recipe_list_view.dart';
-export 'friend_post_list_view.dart';
-export 'friend_post_tile.dart';
+export 'buku_ajar_list_view.dart';
+export 'buku_ajar_thumbnail.dart';
+export 'mahasiswa_thumbnail.dart';
+export 'mahasiswa_list_view.dart';

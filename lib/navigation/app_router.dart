@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../home.dart';
 import '../models/models.dart';
 import '../screens/favorite_screen.dart';
-import '../screens/grocery_item_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/profile_screen.dart';
@@ -13,9 +12,9 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   final AppStateManager? appStateManager;
   final ProfileManager? profileManager;
-  final GroceryManager? groceryManager;
 
-  AppRouter(this.appStateManager, this.profileManager, this.groceryManager);
+
+  AppRouter(this.appStateManager, this.profileManager);
 
   late final router = GoRouter(
     debugLogDiagnostics: true,
@@ -40,21 +39,7 @@ class AppRouter {
           return Home(key: state.pageKey, currentTab: tab);
         },
         routes: [
-          GoRoute(
-            name: 'item',
-            path: 'item/:id',
-            builder: (context, state) {
-              final itemId = state.params['id'] ?? '';
-              final item = groceryManager!.getGroceryItem!(itemId!);
-              return GroceryItemScreen(
-                originalItem: item,
-                onCreate: (item) {
-                  groceryManager!.addItem(item!);
-                },
 
-              );
-            },
-          ),
           GoRoute(
               name: 'profile',
               path: 'profile',
