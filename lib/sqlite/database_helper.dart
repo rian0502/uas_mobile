@@ -44,12 +44,27 @@ class DatabaseHelper{
         '$waktu_data_ditambahkan TEXT, $terakhir_diubah TEXT)';
     await db.execute(sql);
   }
-
+  
   Future<int> addBuku(Data buku) async{
     final dbClient = await database;
     final res = await dbClient!.insert(tablename, buku.toMap());
     print("berhasil ditambahkan");
     return res;
+  }
+  
+  Future<int> deleteBuku(String idBuku) async{
+    final dbClient = await database;
+    final res = await dbClient!.delete(tablename, where: '$id = ?', whereArgs: [idBuku]);
+    print("berhasil menghapus");
+    return res;
+  }
+
+  Future<List> getIdBuku() async{
+    final dbClient = await database;
+    final res = await dbClient!.query(tablename, columns: [id]);
+    List<String> list = res.isNotEmpty ? res.map((c) => c['id_buku_ajar'].toString()).toList() : [];
+    print(list.runtimeType);
+    return list;
   }
 
 

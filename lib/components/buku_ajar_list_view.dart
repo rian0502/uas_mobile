@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unila_data/components/buku_ajar_thumbnail.dart';
+import 'package:unila_data/components/detail_buku_ajar.dart';
 
 import '../models/buku_ajar.dart';
 
@@ -13,7 +14,12 @@ class BukuAjarListView extends StatelessWidget {
     return ListView.builder(
       itemCount: bukuAjar!.data!.length,
         itemBuilder: (context, index) {
-      return BukuAjarThumbnail(bukuAjar: bukuAjar!.data![index]);
+      return GestureDetector(
+        child: BukuAjarThumbnail(bukuAjar: bukuAjar!.data![index],),
+        onTap: () {
+           Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailBukuAjar(bukuAjar: bukuAjar!.data![index])));
+        },
+      );
     });
   }
 }
