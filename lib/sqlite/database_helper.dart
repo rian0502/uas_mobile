@@ -67,6 +67,17 @@ class DatabaseHelper{
     return list;
   }
 
+  Future<List<Data>> getAllBuku() async{
+    final dbClient = await database;
+    final res = await dbClient!.query(tablename, columns: [id, judul_buku, isbn, tanggal_terbit, penerbit, waktu_data_ditambahkan, terakhir_diubah]);
+    final list = res.toList();
+    List<Data> buku = [];
+    for (var i = 0; i < list.length; i++) {
+      buku.add(Data.fromMap(list[i]));
+    }
+    return buku;
+  }
+
 
 
 }

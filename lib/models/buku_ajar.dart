@@ -85,5 +85,17 @@ class Data {
       'terakhir_diubah': terakhirDiubah,
     };
   }
+  // to map
+  factory Data.fromMap(Map<String, dynamic> map) {
+    return Data(
+      idBukuAjar: map['id_buku_ajar'],
+      judulBuku: map['judul_buku'],
+      isbn: map['isbn'],
+      tanggalTerbit: map['tanggal_terbit'],
+      penerbit: map['penerbit'],
+      waktuDataDitambahkan: map['waktu_data_ditambahkan'],
+      terakhirDiubah: map['terakhir_diubah'],
+    );
+  }
 
 }

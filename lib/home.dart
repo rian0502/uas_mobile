@@ -114,8 +114,8 @@ class HomeState extends State<Home> {
   Widget favoritButton(int currentTab) {
     return IconButton(
       icon: const Icon(
-        Icons.favorite,
-        color: Colors.red,
+        Icons.bookmark,
+        color: Colors.grey,
       ),
       onPressed: () {
         context.goNamed('favorite', params: {
