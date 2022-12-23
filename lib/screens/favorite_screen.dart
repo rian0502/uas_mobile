@@ -34,7 +34,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           future: DatabaseHelper.db.getAllBuku(),
           builder: (ontext, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return FavoriteListView(bukuAjar: snapshot.data);
+              return FavoriteListView(bukuAjar: snapshot.data, currentTab: widget.currentTab);
             } else {
               return const Center(child: CircularProgressIndicator());
             }

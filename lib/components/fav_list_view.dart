@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unila_data/sqlite/database_helper.dart';
 import '../models/buku_ajar.dart';
 import 'detail_buku_ajar.dart';
 
 class FavoriteListView extends StatefulWidget {
   final List<Data>? bukuAjar;
-  const FavoriteListView({Key? key, this.bukuAjar}) : super(key: key);
+  final int? currentTab;
+  const FavoriteListView({Key? key, this.bukuAjar, this.currentTab}) : super(key: key);
 
   @override
   State<FavoriteListView> createState() => _FavoriteListViewState();
@@ -26,7 +28,9 @@ class _FavoriteListViewState extends State<FavoriteListView> {
                 onPressed: () {
                   setState(() {
                     DatabaseHelper.db.deleteBuku(widget.bukuAjar![index].idBukuAjar!);
-
+                    context.goNamed('favorite', params: {
+                      'tab': '$widget.currentTab',
+                    });
                   });
                 },
               ),
