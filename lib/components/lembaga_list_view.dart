@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unila_data/models/lembaga.dart';
+import 'detail_lembaga.dart';
 import 'lembaga_thumbnail.dart';
 
 class LembagaListView extends StatelessWidget {
@@ -13,7 +14,10 @@ class LembagaListView extends StatelessWidget {
         child: ListView.builder(
             itemCount: lembaga!.data!.length,
             itemBuilder: (context, index) {
-              return LembagaThumbnail(lembaga: lembaga!.data![index]);}
+              return GestureDetector(child: LembagaThumbnail(lembaga: lembaga!.data![index]),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailLembaga(lembaga: lembaga!.data![index])));
+              },);}
             )
     );
   }
