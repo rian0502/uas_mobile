@@ -42,34 +42,37 @@ class Login{
 
 }
 class Data{
-  String? type;
-  String? token;
-  Data({this.type, this.token});
+  String? tokenStatus;
+  String? tokenDibuat;
+  String? tokenKadarluwasa;
+  String? tokenBearer;
 
-  Data.fromJson(Map<String, dynamic> json){
-    type = json['type'];
-    token = json['token'];
+  Data(
+      {this.tokenStatus,
+        this.tokenDibuat,
+        this.tokenKadarluwasa,
+        this.tokenBearer});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    tokenStatus = json['token_status'];
+    tokenDibuat = json['token_dibuat'];
+    tokenKadarluwasa = json['token_kadarluwasa'];
+    tokenBearer = json['token_bearer'];
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
-    data['token'] = this.token;
+    data['token_status'] = tokenStatus;
+    data['token_dibuat'] = tokenDibuat;
+    data['token_kadarluwasa'] = tokenKadarluwasa;
+    data['token_bearer'] = tokenBearer;
     return data;
   }
 
-
   Data.fromMap(Map<String, dynamic> map){
-    type = map['type'];
-    token = map['token'];
+    tokenStatus = map['token_status'];
+    tokenDibuat = map['token_dibuat'];
+    tokenKadarluwasa = map['token_kadarluwasa'];
+    tokenBearer = map['token_bearer'];
   }
-  Data.toJson(Map<String, dynamic> json){
-    type = json['type'];
-    token = json['token'];
-  }
-  Data.toMap(Map<String, dynamic> map){
-    type = map['type'];
-    token = map['token'];
-  }
-
 }

@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
    <application
-        android:label="unila_data"
+        android:label="One Data Unila"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

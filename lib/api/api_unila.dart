@@ -26,8 +26,8 @@ class ApiUnila {
   }
 
   static Future<Mahasiswa> getMahasiswa(int currentPage) async {
-    var token = await getLoginAccess().then((value) => value.data!.token);
-    dio.options.headers['Authorization'] = "bearer${token}";
+    var token = await getLoginAccess().then((value) => value.data!.tokenBearer);
+    dio.options.headers['Authorization'] = token;
     var response = await dio.get(
         'http://onedata.unila.ac.id/api/live/0.1/mahasiswa/list_mahasiswa?page=$currentPage&limit=50&sort_by=ASC&id_prodi=54BBD27B-2376-4CAE-9951-76EF54BD2CA2');
     if (response.statusCode == 200) {
@@ -39,8 +39,8 @@ class ApiUnila {
   }
 
   static Future<Lembaga> getLembaga() async {
-    var token = await getLoginAccess().then((value) => value.data!.token);
-    dio.options.headers['Authorization'] = "bearer${token}";
+    var token = await getLoginAccess().then((value) => value.data!.tokenBearer);
+    dio.options.headers['Authorization'] = token;
     var response = await dio
         .get('http://onedata.unila.ac.id/api/live/0.1/lembaga/daftar_lembaga');
     if (response.statusCode == 200) {
@@ -52,8 +52,8 @@ class ApiUnila {
   }
 
   static Future<Dosen> getDosen() async {
-    var token = await getLoginAccess().then((value) => value.data!.token);
-    dio.options.headers['Authorization'] = "bearer${token}";
+    var token = await getLoginAccess().then((value) => value.data!.tokenBearer);
+    dio.options.headers['Authorization'] = token;
     var response = await dio.get(
         'http://onedata.unila.ac.id/api/live/0.1/mata_kuliah/list_dosen_ajar?page=1&limit=50&id_kelas=9DCF2A1B-61BE-4E72-8F93-022D58D0F17D');
 
@@ -62,8 +62,8 @@ class ApiUnila {
   }
 
   static Future<BukuAjar> getBukuAjar(page) async{
-    var token = await getLoginAccess().then((value) => value.data!.token);
-    dio.options.headers['Authorization'] = "bearer${token}";
+    var token = await getLoginAccess().then((value) => value.data!.tokenBearer);
+    dio.options.headers['Authorization'] = token;
     var response = await dio.get('http://onedata.unila.ac.id/api/live/0.1/buku_ajar/daftar?page=$page&limit=25&sort_by=ASC');
     if (response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.toString());
